@@ -15,8 +15,9 @@ public class SpringAopApplication {
         SpringApplication.run(SpringAopApplication.class, args);
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
         FileManager fileUtil = (FileManager) context.getBean("fileManager");
-        fileUtil.getExtensionCount("c:\\Windows\\System32");
-        fileUtil.getExtensionCount("c:\\Windows\\");
+        fileUtil.getExtensionCount("C:\\Windows\\System32");
+        fileUtil.getExtensionCount("C:\\Windows\\");
+        fileUtil.getExtensionCount("G:\\Фото\\");
 
         ((ConfigurableApplicationContext)context).close();// закрытие контекста вручную
     }
