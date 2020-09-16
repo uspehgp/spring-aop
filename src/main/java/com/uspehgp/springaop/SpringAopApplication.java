@@ -1,12 +1,11 @@
 package com.uspehgp.springaop;
 
+import com.uspehgp.springaop.objects.FileManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.uspehgp.springaop.objects.SomeService;
 
 @SpringBootApplication
 public class SpringAopApplication {
@@ -15,9 +14,9 @@ public class SpringAopApplication {
     {
         SpringApplication.run(SpringAopApplication.class, args);
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-        SomeService service = (SomeService) context.getBean("someService");
-        double val = service.getDoubleValue();
-        int valint = service.getIntValue();
+        FileManager fileUtil = (FileManager) context.getBean("fileManager");
+        fileUtil.getExtensionCount("c:\\Windows\\System32");
+        fileUtil.getExtensionCount("c:\\Windows\\");
 
         ((ConfigurableApplicationContext)context).close();// закрытие контекста вручную
     }

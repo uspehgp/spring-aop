@@ -11,12 +11,10 @@
 
     <aop:config>
         <aop:aspect id="log" ref="myLogger">
-            <aop:pointcut id="getValue" expression="execution(* com.uspehgp.springaop.objects.SomeService.*(..))" />
-            <aop:before pointcut-ref="getValue" method="init" />
-            <aop:after pointcut-ref="getValue" method="close" />
-            <aop:after-returning pointcut-ref="getValue" returning="obj" method="printValue" />
+            <aop:around pointcut="execution(public * *(..))" method="watchTime" />
         </aop:aspect>
     </aop:config>
+
 
 
 </beans>
