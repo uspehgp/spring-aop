@@ -17,7 +17,7 @@ public class MyLogger {
 	@Pointcut("execution(* *(..)) && within(com.uspehgp.springaop.objects.*)")
 	private void allMethods() {
 	};
-	@Around("allMethods()")
+	@Around("allMethods() && @annotation(com.uspehgp.springaop.annotations.ShowTime)")
 	public Object watchTime(ProceedingJoinPoint joinpoint) {
 		long start = System.currentTimeMillis();
 		System.out.println("method begin: " + joinpoint.getSignature().toShortString() + " >>");
@@ -39,7 +39,7 @@ public class MyLogger {
 
 		return output;
 	}
-	@AfterReturning(pointcut = "allMethods()", returning = "obj")
+	@AfterReturning(pointcut = "allMethods() && @annotation(com.uspehgp.springaop.annotations.ShowResult)", returning = "obj")
 	public void print(Object obj) {
 
 		System.out.println("Print info begin >>");

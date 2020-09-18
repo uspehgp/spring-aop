@@ -7,11 +7,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.uspehgp.springaop.annotations.ShowResult;
+import com.uspehgp.springaop.annotations.ShowTime;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FileManager {
-
+	@ShowTime
+	@ShowResult
 	public Set<String> getExtensionList(String folder) {
 		File dir = new File(folder);
 
@@ -30,7 +33,7 @@ public class FileManager {
 		return extList;
 
 	}
-
+	@ShowResult
 	public Map<String, Integer> getExtensionCount(String folder) {
 
 		File dir = new File(folder);

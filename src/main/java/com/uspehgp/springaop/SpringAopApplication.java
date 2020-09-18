@@ -18,6 +18,7 @@ public class SpringAopApplication {
         fileUtil.getExtensionCount("C:\\Windows\\System32");
         fileUtil.getExtensionCount("C:\\Windows\\");
         fileUtil.getExtensionCount("G:\\Фото\\");
+        fileUtil.getExtensionList("G:\\Фото\\");
 
         ((ConfigurableApplicationContext)context).close();// закрытие контекста вручную
     }
