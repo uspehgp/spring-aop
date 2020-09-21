@@ -8,5 +8,5 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <context:component-scan base-package="com.uspehgp.springaop.*"/>
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 </beans>
