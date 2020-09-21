@@ -21,12 +21,12 @@ public class SpringAopApplication {
         // fileManager.getExtensionCount("c:\\Windows\\System32");
 
         fileManager.getExtensionCount("c:\\Windows\\system32\\drivers");
-        fileManager.getExtensionCount("c:\\Windows\\System32");
-        fileManager.getExtensionList("c:\\Windows\\system32\\drivers");
+//        fileManager.getExtensionCount("c:\\Windows\\System32");
+//        fileManager.getExtensionList("c:\\Windows\\system32\\drivers");
 
         fileManager2.getExtensionCount("c:\\Windows\\");
 
-        ((ConfigurableApplicationContext)context).close();// закрытие контекста вручную
+//        ((ConfigurableApplicationContext)context).close();// закрытие контекста вручную
     }
 
 }

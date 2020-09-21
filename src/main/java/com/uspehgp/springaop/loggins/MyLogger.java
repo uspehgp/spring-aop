@@ -14,10 +14,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyLogger {
 
-	@Pointcut("execution(* *(..)) && within(com.uspehgp.springaop.objects.*)")
+	@Pointcut("execution(* com.uspehgp.springaop.objects.Manager.*(..))")
 	private void allMethods() {
 	};
-	@Around("allMethods() && @annotation(com.uspehgp.springaop.annotations.ShowTime)")
+
+	@Around("allMethods() && execution(java.util.Map *(..))")
 	public Object watchTime(ProceedingJoinPoint joinpoint) {
 		long start = System.currentTimeMillis();
 		System.out.println("method begin: " + joinpoint.getSignature().toShortString() + " >>");
@@ -28,36 +29,45 @@ public class MyLogger {
 		}
 
 		try {
-			output = joinpoint.proceed();
+			output = joinpoint.proceed(new Object[] { "c:\\eclipse" });
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 
 		long time = System.currentTimeMillis() - start;
 		System.out.println("method end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms <<");
-		System.out.println();
 
 		return output;
 	}
-	@AfterReturning(pointcut = "allMethods() && @annotation(com.uspehgp.springaop.annotations.ShowResult)", returning = "obj")
-	public void print(Object obj) {
 
-		System.out.println("Print info begin >>");
+	@SuppressWarnings("rawtypes")
+	@AfterReturning(pointcut = "execution(java.util.Map *(String)) && args(folder)", returning = "obj")
+	public void printMap(Object obj, String folder) {
 
-		if (obj instanceof Set) {
-			Set set = (Set) obj;
-			for (Object object : set) {
-				System.out.println(object);
-			}
-
-		} else if (obj instanceof Map) {
-			Map map = (Map) obj;
-			for (Object object : map.keySet()) {
-				System.out.println("key=" + object + ", " + map.get(object));
-			}
+		System.out.println("Printing map >>");
+		System.out.println("Folder = " + folder);
+		Map map = (Map) obj;
+		for (Object object : map.keySet()) {
+			System.out.println("key=" + object + ", " + map.get(object));
 		}
 
-		System.out.println("Print info end <<");
+		System.out.println("End printing map <<");
+		System.out.println();
+
+	}
+
+	@SuppressWarnings("rawtypes")
+	@AfterReturning(pointcut = "execution(java.util.Set *(String)) && args(folder)", returning = "obj")
+	public void printSet(Object obj, String folder) {
+
+		System.out.println("Printing set >>");
+		System.out.println("Folder = " + folder);
+		Set set = (Set) obj;
+		for (Object object : set) {
+			System.out.println(object);
+		}
+
+		System.out.println("End printing set <<");
 		System.out.println();
 
 	}
